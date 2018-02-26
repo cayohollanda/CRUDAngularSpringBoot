@@ -1,0 +1,60 @@
+<form #frm="ngForm" (ngSubmit)="adicionar(frm)">
+
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <h1>Cadastrar Clientes</h1>
+    </div>
+
+    <div class="ui-g-6 ui-fluid">
+      <label>Primeiro Nome</label>
+      <input pInputText name="primeiroNome" ngModel [required]="true" />
+    </div>
+
+    <div class="ui-g-6 ui-fluid">
+      <label>Último Nome</label>
+      <input pInputText name="ultimoNome" ngModel [required]="true" />
+    </div>
+
+    <div class="ui-g-6 ui-fluid">
+      <label>E-mail</label>
+      <input pInputText name="email" ngModel type="email" [required]="true" />
+    </div>
+
+    <div class="ui-g-6 ui-fluid">
+      <label>CPF</label>
+      <p-inputMask name="cpf" mask="999.999.999-99" [required]="true" ngModel></p-inputMask>
+    </div>
+
+    <div class="ui-g-12 ui-fluid">
+      <label>Telefone</label>
+      <p-inputMask name="telefone" mask="(99) 99999-9999" [required]="true" ngModel></p-inputMask>
+    </div>
+
+    <div class="ui-g-12">
+      <button type="submit" pButton [disabled]="frm.invalid" label="Adicionar"></button>
+    </div>
+  </div>
+
+</form>
+
+<div class="ui-g">
+
+  <div class="ui-g-12">
+    <p-panel header="Lista de Clientes">
+      <p-dataTable [value]="itens" [editable]="true">
+        <p-column field="primeiroNome" header="Primeiro Nome" [editable]="true"></p-column>
+        <p-column field="ultimoNome" header="Último Nome" [editable]="true"></p-column>
+        <p-column field="email" header="E-mail" [editable]="true"></p-column>
+        <p-column field="cpf" header="CPF" [editable]="true"></p-column>
+        <p-column field="telefone" header="Telefone" [editable]="true"></p-column>
+        <p-column header="Ações">
+          <ng-template pTemplate="body" let-item="rowData">
+            <button type="button" routerLink="/edit" [queryParams]="item" pButton icon="fa-edit"></button>
+            <button type="button" pButton (click)="deletar(item)" icon="fa-remove"></button>
+          </ng-template>
+        </p-column>
+      </p-dataTable>
+    </p-panel>
+  </div>
+  
+</div>
